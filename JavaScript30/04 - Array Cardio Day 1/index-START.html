@@ -35,31 +35,74 @@
       'Billings, Josh', 'Birrell, Augustine', 'Blair, Tony', 'Beecher, Henry', 'Biondo, Frank'
     ];
     
-    // Array.prototype.filter()
+    // Array.prototype.filter() 會複製一個新陣列
     // 1. Filter the list of inventors for those who were born in the 1500's
 
-    // Array.prototype.map()
+    // let ans = inventors.filter(function(inventor){
+    //   return inventor.year >= 1500 && inventor.year < 1600;
+    // })
+    
+    //使用箭頭函式
+    let ans1 = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600)
+    console.table(ans1);
+
+    // Array.prototype.map() 會產生新陣列
     // 2. Give us an array of the inventors first and last names
 
-    // Array.prototype.sort()
+    let ans2 = inventors.map(inventor => inventor.first + " " + inventor.last)
+    console.table(ans2)
+
+    // Array.prototype.sort() 排序 回傳一個陣列
     // 3. Sort the inventors by birthdate, oldest to youngest
 
-    // Array.prototype.reduce()
+    let ans3 = inventors.sort((a,b) => a.year - b.year) //<0 ==0 >0
+    console.table(ans3)
+
+    // Array.prototype.reduce() 對每個陣列做加減，回傳一個值
     // 4. How many years did all the inventors live all together?
+    //從陣列的每一筆資料取一個，並加總起來
+    let total = inventors.reduce((total,inventor)=>{
+      return total + inventor.passed - inventor.year
+    },0)
+    console.log(total)
 
     // 5. Sort the inventors by years lived
+
+    let ans5 = inventors.sort((a,b)=>{
+      return (a.passed - a.year) - (b.passed - b.year)
+    })
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
-
+    let arr =[]
+    document.querySelectorAll('.mw-category-group li a').forEach((a)=>{
+      arr.push(a.title)
+    })
+    let ans6 = arr.filter(title=>title.indexOf('de') !== -1)
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+
+    let ans7 = people.sort((a,b)=>{
+      let [aFirst,aLast] = a.split(', ')
+      let [bFirst,bLast] = b.split(', ')
+
+      return aLast > bLast ? 1 : bLast > aLast ? -1 : 0
+    })
+
+    console.table(ans7)
 
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    let ans8 = data.reduce((obj,content)=>{
+      if(!obj[content]) obj[content] = 1
+      else obj[content] += 1
+
+      return obj
+    },{})
+    console.table(ans8)
   </script>
 </body>
 </html>
