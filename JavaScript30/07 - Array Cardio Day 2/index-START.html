@@ -24,17 +24,45 @@
       { text: 'Nice Nice Nice!', id: 542328 }
     ];
 
-    // Some and Every Checks
+    // Some and Every Checks 檢查陣列是否有條件符合
     // Array.prototype.some() // is at least one person 19 or older?
+    const ansSome = people.some(p =>{
+      return new Date().getUTCFullYear - p.year >= 19;
+    })
+    console.log(ansSome);
     // Array.prototype.every() // is everyone 19 or older?
+    const ansEvery = people.every(p =>{
+      return new Date().getUTCFullYear - p.year >= 19;
+    })
+    console.log(ansEvery);
 
     // Array.prototype.find()
-    // Find is like filter, but instead returns just the one you are looking for
+    // Find is like filter, but instead returns just the one you are looking for(找一個)
     // find the comment with the ID of 823423
+    const ansFind = comments.find(comment => comment.id === 823423)
+    console.log(ansFind);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
+    const ansFindIndex = comments.findIndex(comment => comment.id === 823423)
+    console.log(ansFindIndex);
+
     // delete the comment with the ID of 823423
+    // splice(直接處理原始資料), slice(複製一份原始資料)
+    
+    // const ansSplice = comments.splice(ansFindIndex,1);
+    // console.log(ansSplice);
+
+    const ansSlice1 = comments.slice(0,ansFindIndex);
+    const ansSlice2 = comments.slice(ansFindIndex+1);
+
+    const ansSlice3 = [...ansSlice1,...ansSlice2];
+    // const ansSlice3 = [...comments.slice(0,ansFindIndex),...comments.slice(ansFindIndex+1)];
+    
+    console.log(ansSlice3,comments)
+
+
+
 
   </script>
 </body>
