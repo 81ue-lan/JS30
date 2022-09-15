@@ -96,6 +96,35 @@
   </div>
 
 <script>
+  ;(function(){
+    const checkboxes = Array.from(
+      document.querySelectorAll('.inbox input[type="checkbox"]')
+    );
+
+    //記錄上一個打勾的編號
+    let lastCheck = null;
+
+    function clickerHandler(e){
+      console.log(e);
+      if(this.checked){
+        if(e.shiftKey && lastCheck !== null){
+          let nowCheck = checkboxes.indexOf(this);
+          checkboxes.slice(
+            Math.min(nowCheck,lastCheck),
+            Math.max(nowCheck,lastCheck)
+            )
+            .forEach(input => (input.checked = true));
+        }
+        lastCheck = checkboxes.indexOf(this);
+      }else{
+        lastCheck = null;
+      }
+    }
+
+    checkboxes.forEach(input => {
+      input.addEventListener('click',clickerHandler);
+    });
+  })();
 </script>
 </body>
 </html>
