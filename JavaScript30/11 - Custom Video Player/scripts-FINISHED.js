@@ -11,6 +11,14 @@ const ranges = player.querySelectorAll('.player__slider');
 function togglePlay() {
   const method = video.paused ? 'play' : 'pause';
   video[method]();
+
+  /*等同於
+  if(video.paused){
+    video.paused();
+  }else{
+    video.play();
+  }
+  */
 }
 
 function updateButton() {
@@ -24,6 +32,7 @@ function skip() {
 }
 
 function handleRangeUpdate() {
+  // video.volume, vedio.playbackRate
   video[this.name] = this.value;
 }
 
@@ -31,7 +40,7 @@ function handleProgress() {
   const percent = (video.currentTime / video.duration) * 100;
   progressBar.style.flexBasis = `${percent}%`;
 }
-
+// 拖曳播放bar控制影片時間
 function scrub(e) {
   const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
   video.currentTime = scrubTime;
@@ -39,12 +48,15 @@ function scrub(e) {
 
 /* Hook up the event listeners */
 video.addEventListener('click', togglePlay);
+// 更新按鈕
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
+
 video.addEventListener('timeupdate', handleProgress);
 
 toggle.addEventListener('click', togglePlay);
 skipButtons.forEach(button => button.addEventListener('click', skip));
+
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
 
