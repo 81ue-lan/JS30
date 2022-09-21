@@ -7,6 +7,19 @@
 </head>
 <body>
 <script>
+  const secretCode = [38,38,40,40,37,39,37,39,66,65];
+  const input = [];
+  window.addEventListener('keyup',function(e){
+    // console.log(e.key,e.keyCode);
+    input.push(e.keyCode);
+
+    input.splice(0,input.length = secretCode.length);
+
+    console.log(input,secretCode);
+    if(input.join() == secretCode.join()){
+      cornify_add();
+    }
+})
 </script>
 </body>
 </html>
