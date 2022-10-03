@@ -43,6 +43,9 @@
   </div>
 
   <script>
+
+    //因為scroll是連續觸發事件，所以用debounce來壓低觸發事件次數，有延遲的效果
+    //閉包 https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Closures
     function debounce(func, wait = 20, immediate = true) {
       var timeout;
       return function() {
@@ -57,7 +60,25 @@
         if (callNow) func.apply(context, args);
       };
     }
+    
+    let images = document.querySelectorAll('img');
+    function scrollHandler(){
+      // console.log(window.scrollY);
+      let windowTop = window.scrollY;
+      let windowBottom = windowTop + window.innerHeight;
+    
+      images.forEach(img =>{
+        let imgMiddle = img.offsetTop + img.height /2;
+        //滑到圖片中間的時候，圖片進入、進出
+        if( imgMiddle < windowBottom && imgMiddle > windowTop){
+          img.classList.add('active');
+        }else{
+          img.classList.remove('active');
+        }
+      });
 
+    }
+    window.addEventListener('scroll',debounce(scrollHandler));
   </script>
 
   <style>
