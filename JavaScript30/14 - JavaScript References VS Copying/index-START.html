@@ -9,40 +9,96 @@
   <script>
     // start with strings, numbers and booleans
 
+    let a = 'alex'
+    let b = a
+    a = 'B'
+    console.log(a,b) //B,A
+
+    let c = 0
+    let d = c
+    c++
+    console.log(c,d) //1,0
+
+    let e = true
+    let f = e
+    e != f
+    console.log(e,f)//false,true
+
+
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
+    // let players2 = players;
 
     // however what happens when we update that array?
-
+    // players2[0] = 'lan';
     // now here is the problem!
-
-    // oh no - we have edited the original array too!
+    // console.log(players,players2);
+    // oh no - 原始陣列也會被修改
 
     // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    let players2 = players.slice();
+    players2 = [].concat(players);
+    players2 = [...players];
+    players2[0] = "lan";
+    console.log(players,players2);
 
+    function createObj(name){
+      return{
+        name
+      };
+    }
+
+    let p1 = createObj("Lan");
+    let p2 = createObj("Pie");
+    let p3 = createObj("Hana");
+    let p4 = createObj("Billy");
+
+    let f1 = [p1,p2,p3,p4];
+    let f2 = f1.slice();
+    // let f2 = [].concat(f1);
+    // let f2 = [...f1];
+
+    f2[0].name = "Blue";
+    
+    console.log(f1[0].name);
+
+    // 可以使用slice、concate、ES6解構
     // or create a new array and concat the old one in
 
     // or use the new ES6 Spread
 
     // now when we update it, the original one isn't changed
 
-    // The same thing goes for objects, let's say we have a person object
+    // 處理物件也是相同的觀念
 
     // with Objects
-    const person = {
+    let person = {
       name: 'Wes Bos',
       age: 80
     };
 
     // and think we make a copy:
+
+    let p = person;
+    // case1
+    // person = 'XXX';
+    // console.log(person,p); // XXX,{...}
+
+    // case2
+    // person.name = 'XXX';
+    // console.log(person,p); // {XXX...}, {XXX...}
+
+
+    let ppl = Object.assign({},person);
 
     // how do we take a copy instead?
 
