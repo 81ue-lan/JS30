@@ -28,8 +28,7 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
-
+  const items = JSON.parse(localStorage.getItem('items')) || [];
 
   function createList(data = [], dom) {
     dom.innerHTML = data.map((plate, i) => {
@@ -56,8 +55,18 @@
     createList(items,itemsList);//更新畫面
   }
 
+  function toggle(e){
+    //避免重複觸發，判斷是input才處理
+    if(!e.target.matches('input')) return;
+        
+    let index = e.target.dataset['index'];
+    items[index].done = !items[index].done; // items[index].done = true; 更新JS資料
+    localStorage.setItem("items",JSON.stringify(items));//更新localStorage的資料
+    createList(items,itemsList);//更新畫面
+  }
+
   addItems.addEventListener('submit',addItem);
-  // itemsList.addEventListener('click', toggleDone);
+  itemsList.addEventListener('click', toggle);
 
 
 
