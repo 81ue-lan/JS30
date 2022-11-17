@@ -35,6 +35,19 @@
   </style>
 
 <script>
+  (function(){
+    document.querySelector('hero').addEventListener('mousemove',function(e){
+      //第一種寫法(old school)
+      // let x = e.offsetX;
+      // let y = e.offsetY;
+
+      // 第二種寫法
+      let {offsetX,offsetY} = e;
+
+      // 第三種寫法
+      let {offsetX:x , offsetY:y} = e;
+    });
+  })();
 </script>
 </body>
 </html>
